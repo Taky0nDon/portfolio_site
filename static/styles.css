@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    flex-flow: column;
+}
+
+.header-text {
+    margin: auto;
+    text-align: center;
+}
+
+.top-img {
+    margin: auto;
+    width: 25rem;
+}
+
+.nav-bar {
+    margin: auto;
+}
+
+.nav-button {
+    display: inline-block;
+    margin: auto;
+}
