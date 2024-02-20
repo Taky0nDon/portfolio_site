@@ -18,11 +18,11 @@
             <!-- Navigation-->
             <h1 class="header-text">Welcome</h1>
             <nav class="nav-bar">
-                <div class="nav-button">| <a>Home</a> </button>
-                <div class="nav-button">| <a href="">Projects</a> </button>
-                <div class="nav-button">| <a href="">More About Me</a> </button>
-                <div class="nav-button">| <a href="">More About This Site</a> </button>
-                <div class="nav-button">| <a href="">Contact/Socials</a> |</button>
+                <div class="nav-button">| <a href="{{ url_for('home') }}">Home</a> </button>
+                <div class="nav-button">| <a href="{{ url_for('show_projects_page') }}">Projects</a> </button>
+                <div class="nav-button">| <a href="{{ url_for('show_about_me_page') }}">More About Me</a> </button>
+                <div class="nav-button">| <a href="{{ url_for('show_about_site_page') }}">More About This Site</a> </button>
+                <div class="nav-button">| <a href="{{ url_for('show_contact_page') }}">Contact/Socials</a> |</button>
             </nav>
         
         </div> 
