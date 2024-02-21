@@ -5,8 +5,6 @@ from flask import Flask, abort, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
 
-from Projectsdb import connect_to_db
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = None
 
@@ -16,6 +14,7 @@ db.init_app(app)
 
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    github_url = db.Column(db.String)
     title = db.Column(db.String())
     img_url_1 = db.Column(db.String()) 
     img_url_2 = db.Column(db.String()) 
