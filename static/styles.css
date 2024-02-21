@@ -28,14 +28,18 @@
     margin: auto;
 }
 
-.project-view-container{
+.project-view-container {
     text-align: center;
 }
 
-.project-images{
+.project-images {
     text-align: center;
 }
 
-.project-title{
+.project-title {
+    text-align: center;
+}
+
+.project-description {
     text-align: center;
 }
