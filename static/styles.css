@@ -8,6 +8,9 @@
     text-align: center;
 }
 
+.container {
+    display: flex;
+}
 .secondary-header {
     text-align: center;
 }
@@ -23,4 +26,16 @@
 .nav-button {
     display: inline-block;
     margin: auto;
+}
+
+.project-view-container{
+    text-align: center;
+}
+
+.project-images{
+    text-align: center;
+}
+
+.project-title{
+    text-align: center;
 }
