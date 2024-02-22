@@ -11,9 +11,11 @@
 .container {
     display: flex;
 }
+
 .secondary-header {
     text-align: center;
 }
+
 .top-img {
     margin: auto;
     width: 25rem;
@@ -41,5 +43,9 @@
 }
 
 .project-description {
+    text-align: center;
+}
+
+.project-gh-url {
     text-align: center;
 }
