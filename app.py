@@ -21,6 +21,9 @@ class Project(db.Model):
     description = db.Column(db.String())
 
 
+with app.app_context():
+    db.create_all()
+
 @app.route('/')
 def home():
     return render_template("index.html")
