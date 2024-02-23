@@ -1,6 +1,7 @@
 .header {
     display: flex;
     flex-flow: column;
+    flex-direction: column;
 }
 
 .header-text {
@@ -10,9 +11,16 @@
 
 .container {
     display: flex;
+    flex-flow: column;
+    flex-direction: column;
+    justify-content:space-between;
 }
 
 .secondary-header {
+    text-align: center;
+}
+
+.project-view-container {
     text-align: center;
 }
 
@@ -28,10 +36,6 @@
 .nav-button {
     display: inline-block;
     margin: auto;
-}
-
-.project-view-container {
-    text-align: center;
 }
 
 .project-images {
