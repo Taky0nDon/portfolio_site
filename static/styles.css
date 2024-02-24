@@ -9,21 +9,6 @@
     text-align: center;
 }
 
-.container {
-    display: flex;
-    flex-flow: column;
-    flex-direction: column;
-    justify-content:space-between;
-}
-
-.secondary-header {
-    text-align: center;
-}
-
-.project-view-container {
-    text-align: center;
-}
-
 .top-img {
     margin: auto;
     width: 25rem;
@@ -38,7 +23,16 @@
     margin: auto;
 }
 
-.project-images {
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.secondary-header {
+    text-align: center;
+}
+
+.project-view-container {
     text-align: center;
 }
 
@@ -46,8 +40,17 @@
     text-align: center;
 }
 
+.project-images {
+    justify-content: center;
+}
+
+.project-images img {
+    width: 25%
+}
+
 .project-description {
-    text-align: center;
+    margin: 0 auto;
+    width: 50%;
 }
 
 .project-gh-url {
