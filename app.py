@@ -5,6 +5,7 @@ from flask import Flask, abort, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
 
+os.environ["DB_URI"] = "sqlite:///test-db.db" 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = None
 
