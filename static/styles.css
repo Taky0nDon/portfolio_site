@@ -32,8 +32,19 @@
     text-align: center;
 }
 
+.project-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .project-view-container {
-    text-align: center;
+    flex: .4;
+    border: 2px solid yellow;
+}
+
+.project-view-container:first-child {
+    margin-right: 5%;
 }
 
 .project-title {
