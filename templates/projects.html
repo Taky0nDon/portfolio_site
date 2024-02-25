@@ -4,6 +4,7 @@
         <h2>My Projects</h2>
     </div>
 
+    {% for n in range(2) %}
     <div class="project-view-container">
 
         <div class="project-title">
@@ -25,6 +26,7 @@
         </div>
 
     </div>
+    {% endfor %}
 
 </div>
 {% include "footer.html" %}
