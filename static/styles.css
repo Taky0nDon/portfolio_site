@@ -1,18 +1,11 @@
 .header {
     display: flex;
     flex-flow: column;
+    flex-direction: column;
 }
 
 .header-text {
     margin: auto;
-    text-align: center;
-}
-
-.container {
-    display: flex;
-}
-
-.secondary-header {
     text-align: center;
 }
 
@@ -30,20 +23,45 @@
     margin: auto;
 }
 
-.project-view-container {
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.secondary-header {
     text-align: center;
 }
 
-.project-images {
-    text-align: center;
+.project-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project-view-container {
+    flex: .4;
+    border: 2px solid yellow;
+}
+
+.project-view-container:first-child {
+    margin-right: 5%;
 }
 
 .project-title {
     text-align: center;
 }
 
+.project-images {
+    justify-content: center;
+}
+
+.project-images img {
+    width: 25%
+}
+
 .project-description {
-    text-align: center;
+    margin: 0 auto;
+    width: 50%;
 }
 
 .project-gh-url {

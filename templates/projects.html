@@ -3,22 +3,36 @@
     <div class="secondary-header">
         <h2>My Projects</h2>
     </div>
-    <div class="project-view-container">
-        <div class="project-title">
-            <b>Project Title Goes Here</b>
+
+    {% for n in range(project_count) %}
+        {% if n % 2 == 0 %}
+            <div class="project-row">
+        {% endif %}
+        <div class="project-view-container">
+
+            <div class="project-title">
+                <b>Project Title Goes Here</b>
+            </div>
+
+            <div class="project-images">
+                <img src="/static/img/site_screenshot.png" />
+                <img src="/static/img/site_screenshot.png" />
+            </div>
+
+            <span class="project-description">
+                llorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+        lorem ipsum lorem ipsum lorem ipsum lorem ipsum more text goes here lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum orem ipsum
+            </span>
+
+            <div class="project-gh-url">
+                <a href="https://github.com>Learn More">Github</a>
+            </div>
 
         </div>
-        <div class="project-images">
-            <img src="" />
-            <img src="" />
-        </div>
-        <div class="project-description">
-            llorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum orem ipsum
-        </div>
-        <div class="project-gh-url">
-            <a href="https://github.com>Learn More</a>
-        </div>
-    </div>
+        {% if n % 2 == 1 %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
 </div>
 {% include "footer.html" %}
