@@ -21,7 +21,7 @@ class Project(db.Model):
     github_url = db.Column(db.String, nullable=False)
     title = db.Column(db.String(), nullable=False)
     img_url_1 = db.Column(db.String(), nullable=False) 
-    img_url_2 = db.Column(db.String(), nullable=False) 
+    img_url_2 = db.Column(db.String(), nullable=True) 
     description = db.Column(db.String(), nullable=False)
 
 
@@ -34,7 +34,9 @@ def home():
 
 @app.route('/projects')
 def show_projects_page():
-    return render_template("projects.html", project_count=5)
+    result = db.session.execute(db.select(Project))
+    project_rows = result.scalars().all()
+    return render_template("projects.html", projects=project_rows)
 
 @app.route('/about-me')
 def show_about_me_page():
@@ -47,6 +49,22 @@ def show_about_site_page():
 @app.route('/contact')
 def show_contact_page():
     return render_template("contact.html")
+
+@app.route('/admin/add')
+def add_project_data():
+    form = AddProjectForm()
+    if form.validate_on_submit():
+        new_project = Project(
+            title=form.project_title.data,
+            description=form.project_description.data,
+            github_url=form.project_github_url.data,
+            img_url_1=form.project_img_url_1.data,
+            img_url_2=form.project_img_url_2.data,
+        )
+        db.session.add(new_project)
+        db.session.commit()
+        return redirect(url_for("/projects"))
+    return render_template("add_project.html", form=form)
 
 if __name__ == "__main__":
     app.run(debug=True)
