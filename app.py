@@ -14,12 +14,12 @@ db = SQLAlchemy()
 db.init_app(app)
 
 class Project(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    github_url = db.Column(db.String)
-    title = db.Column(db.String())
-    img_url_1 = db.Column(db.String()) 
-    img_url_2 = db.Column(db.String()) 
-    description = db.Column(db.String())
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    github_url = db.Column(db.String, nullable=False)
+    title = db.Column(db.String(), nullable=False)
+    img_url_1 = db.Column(db.String(), nullable=False) 
+    img_url_2 = db.Column(db.String(), nullable=False) 
+    description = db.Column(db.String(), nullable=False)
 
 
 with app.app_context():
