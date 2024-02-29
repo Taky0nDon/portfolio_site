@@ -53,7 +53,7 @@ def show_about_site_page():
 def show_contact_page():
     return render_template("contact.html")
 
-@app.route('/admin/add')
+@app.route('/admin/add', methods=["GET", "POST"])
 def add_project_data():
     form = AddProjectForm()
     if form.validate_on_submit():
@@ -66,7 +66,7 @@ def add_project_data():
         )
         db.session.add(new_project)
         db.session.commit()
-        return redirect(url_for("/projects"))
+        return redirect(url_for("show_projects_page"))
     return render_template("add_project.html", form=form)
 
 if __name__ == "__main__":
