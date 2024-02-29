@@ -39,8 +39,11 @@
 }
 
 .project-view-container {
+    display: flex;
+    flex-flow: column;
     flex: .4;
     border: 2px solid yellow;
+    align-items: normal;
 }
 
 .project-view-container:first-child {
@@ -52,10 +55,12 @@
 }
 
 .project-images {
-    justify-content: center;
+    display: flex;
+    justify-content: space-around;
 }
 
 .project-images img {
+    justify-self: center;
     width: 25%
 }
 
