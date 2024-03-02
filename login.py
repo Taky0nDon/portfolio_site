@@ -1,6 +1,11 @@
 # Should I make a new class that inherits from LoginManager?
 from flask_login import UserMixin, login_user, LoginManager, current_user, logout_user, login_required
 
+class auth(LoginManager):
+    def __init__(self, app):
+        self.manager = LoginManager()
+        self.manager.init_app(app)
+
 class User(db.Model, UserMixin):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
@@ -16,8 +21,8 @@ def admin_only(function):
             return function(*args, **kwargs)
     return decorated_view
 
-login_manager = LoginManager()
-login_manager.init_app(app)
+# login_manager = LoginManager()
+# login_manager.init_app(app)
 
 
 @login_manager.user_loader
