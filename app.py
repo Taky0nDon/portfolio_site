@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 from forms import AddProjectForm
-# from login import auth
+from login import auth, UserMixin
 
 
 os.environ["DB_URI"] = "sqlite:///test-db.db" 
@@ -20,6 +20,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
 db = SQLAlchemy()
 db.init_app(app)
 
+auth_manager = auth(app)
+
+@auth_manager.user_loader
+def load_user(user_id):
+    return db.session.get(User, user_id)
+
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     github_url = db.Column(db.String, nullable=False)
@@ -27,6 +33,13 @@ class Project(db.Model):
     img_url_1 = db.Column(db.String(), nullable=False) 
     img_url_2 = db.Column(db.String(), nullable=True) 
     description = db.Column(db.String(), nullable=False)
+
+
+class User(db.Model, UserMixin):
+    __tablename__ = "user"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    password_hash = db.Column(db.String, nullable=False)
 
 
 with app.app_context():
