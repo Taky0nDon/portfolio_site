@@ -69,6 +69,20 @@ def add_project_data():
         return redirect(url_for("show_projects_page"))
     return render_template("add_project.html", form=form)
 
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    login_form = LoginForm()
+    if login_form.validate_on_submit():
+        user = db.session.execute(db.select(User).where(User.email == login_form.email.data)).scalar()
+        if not user:
+            flash("No account found for that email address!")
+        elif not check_password_hash(user.password_hash, login_form.password.data):
+            flash("Incorrect password!")
+        else:
+            login_user(user)
+            return redirect(url_for('get_all_posts'))
+    return render_template("login.html", form=login_form)
+
 if __name__ == "__main__":
     app.run(debug=True)
 
