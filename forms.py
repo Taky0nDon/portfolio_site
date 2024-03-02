@@ -13,6 +13,12 @@ class AddProjectForm(FlaskForm):
     project_github_url = StringField("project_github_url", validators=[DataRequired()])
     add_project = SubmitField("Add Project")
 
+
+class LoginForm(FlaskForm):
+    email = StringField("Name", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Log in.")
+
 # id = db.Column(db.Integer, primary_key=True)
 # github_url = db.Column(db.String)
 # description = db.Column(db.String())
