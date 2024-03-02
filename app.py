@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 from forms import AddProjectForm
+from login import auth
 
 
 os.environ["DB_URI"] = "sqlite:///test-db.db" 
