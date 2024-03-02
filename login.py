@@ -5,13 +5,6 @@ class auth(LoginManager):
     def __init__(self, app):
         self.manager = LoginManager()
         self.manager.init_app(app)
-
-class User(db.Model, UserMixin):
-    __tablename__ = "user"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    password_hash = db.Column(db.String, nullable=False)
-
 def admin_only(function):
     @wraps(function)
     def decorated_view(*args, **kwargs):
@@ -25,6 +18,3 @@ def admin_only(function):
 # login_manager.init_app(app)
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return db.session.get(User, user_id)
