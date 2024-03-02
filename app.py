@@ -4,10 +4,9 @@ import os
 from flask import Flask, abort, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_login import UserMixin, login_user, LoginManager, current_user, logout_user, login_required
 
 from forms import AddProjectForm
-from login import auth, UserMixin
 
 
 os.environ["DB_URI"] = "sqlite:///test-db.db" 
@@ -20,11 +19,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
 db = SQLAlchemy()
 db.init_app(app)
 
-auth_manager = auth(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
-@auth_manager.user_loader
-def load_user(user_id):
-    return db.session.get(User, user_id)
 
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -44,6 +41,10 @@ class User(db.Model, UserMixin):
 
 with app.app_context():
     db.create_all()
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.get(User, user_id)
 
 @app.route('/')
 def home():
