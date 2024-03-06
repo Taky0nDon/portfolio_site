@@ -3,11 +3,11 @@ import os
 
 from flask import Flask, abort, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
-from flask_sqlalchemy import SQLAlchemy
 
 
 from forms import AddProjectForm
 from login import auth, UserMixin
+from classes import db, Project, User
 
 
 os.environ["DB_URI"] = "sqlite:///test-db.db" 
@@ -17,7 +17,6 @@ Bootstrap5(app)
 app.config['SECRET_KEY'] = os.environ["secret_key"]
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
-db = SQLAlchemy()
 db.init_app(app)
 
 auth_manager = auth(app)
