@@ -5,8 +5,8 @@ from flask import Flask, abort, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
 
 
-from forms import AddProjectForm
-from login import auth, UserMixin
+from forms import AddProjectForm, LoginForm
+from login import auth, login_user, check_password_hash
 from classes import db, Project, User
 
 
@@ -24,21 +24,6 @@ auth_manager = auth(app)
 @auth_manager.manager.user_loader
 def load_user(user_id):
     return db.session.get(User, user_id)
-
-class Project(db.Model):
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
-    github_url = db.Column(db.String, nullable=False)
-    title = db.Column(db.String(), nullable=False)
-    img_url_1 = db.Column(db.String(), nullable=False) 
-    img_url_2 = db.Column(db.String(), nullable=True) 
-    description = db.Column(db.String(), nullable=False)
-
-
-class User(db.Model, UserMixin):
-    __tablename__ = "user"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    password_hash = db.Column(db.String, nullable=False)
 
 
 with app.app_context():
@@ -80,21 +65,24 @@ def add_project_data():
         db.session.add(new_project)
         db.session.commit()
         return redirect(url_for("show_projects_page"))
-    return render_template("add_project.html", form=form)
+    return render_template("show_form.html", form=form)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
-        user = db.session.execute(db.select(User).where(User.email == login_form.email.data)).scalar()
+        user = db.session.execute(db.select(User).where(User.name == login_form.id.data)).scalar()
+        print(f"{user=}, {login_form.id.data=}")
+        # TODO reimplemet password hash
         if not user:
-            flash("No account found for that email address!")
-        elif not check_password_hash(user.password_hash, login_form.password.data):
+            print("login failed")
+            flash("YOU ARE NOT THE ADMIN, PLEASE LEAVE.")
+        elif not user.password_hash == login_form.password.data:
             flash("Incorrect password!")
         else:
-            login_user(user)
-            return redirect(url_for('get_all_posts'))
-    return render_template("login.html", form=login_form)
+            flash("credential correct")
+            # login_user(user)
+    return render_template("show_form.html", form=login_form)
 
 if __name__ == "__main__":
     app.run(debug=True)
