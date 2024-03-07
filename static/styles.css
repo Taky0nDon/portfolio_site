@@ -64,6 +64,10 @@
     width: 25%
 }
 
+.textarea {
+    width: 50%;
+
+}
 .project-description {
     margin: 0 auto;
     width: 50%;
