@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+from flask_login import UserMixin, LoginManager
  
 db = SQLAlchemy()
 
@@ -17,4 +17,10 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
+
+
+class Auth(loginmanager):
+    def __init__(self, app):
+        self.manager = LoginManager()
+        self.manager.init_app(app)
 
