@@ -1,37 +1,47 @@
+from flask import Flask, abort, render_template, redirect, url_for, flash
+from flask_bootstrap import Bootstrap5
+from functools import wraps
+
+
 import os
 
 
-from flask import Flask, abort, render_template, redirect, url_for, flash
-from flask_bootstrap import Bootstrap5
-
-
 from forms import AddProjectForm, LoginForm
-from login import auth, login_user, check_password_hash
-from classes import db, Project, User
+from login import login_user, check_password_hash, current_user
+from classes import db, Project, User, Auth
 
 
-os.environ["DB_URI"] = "sqlite:///test-db.db" 
 app = Flask(__name__)
 Bootstrap5(app)
 
+os.environ["DB_URI"] = "sqlite:///test-db.db" 
 app.config['SECRET_KEY'] = os.environ["secret_key"]
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
 db.init_app(app)
 
-auth_manager = auth(app)
+with app.app_context():
+    db.create_all()
 
+auth_manager = auth(app)
 @auth_manager.manager.user_loader
 def load_user(user_id):
     return db.session.get(User, user_id)
 
 
-with app.app_context():
-    db.create_all()
+def admin_only(function):
+    @wraps(function)
+    def decorated_view(*args, **kwargs):
+        if current_user.is_anonymous or current_user.id != 1:
+            return abort(code=403)
+        else:
+            return function(*args, **kwargs)
+    return decorated_view
+
 
 @app.route('/')
 def home():
     return render_template("index.html")
+
 
 @app.route('/projects')
 def show_projects_page():
@@ -39,17 +49,21 @@ def show_projects_page():
     project_rows = result.scalars().all()
     return render_template("projects.html", projects=project_rows)
 
+
 @app.route('/about-me')
 def show_about_me_page():
     return render_template("about-me.html")
+
 
 @app.route('/about-site')
 def show_about_site_page():
     return render_template("about-site.html")
 
+
 @app.route('/contact')
 def show_contact_page():
     return render_template("contact.html")
+
 
 @app.route('/admin/add', methods=["GET", "POST"])
 def add_project_data():
@@ -67,6 +81,7 @@ def add_project_data():
         return redirect(url_for("show_projects_page"))
     return render_template("show_form.html", form=form)
 
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     login_form = LoginForm()
@@ -83,6 +98,7 @@ def login():
             flash("credential correct")
             # login_user(user)
     return render_template("show_form.html", form=login_form)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
