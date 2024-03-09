@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String, nullable=False)
 
 
-class Auth(loginmanager):
+class Auth(LoginManager):
     def __init__(self, app):
         self.manager = LoginManager()
         self.manager.init_app(app)

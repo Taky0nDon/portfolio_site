@@ -1,13 +1,14 @@
 from flask import Flask, abort, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
 from functools import wraps
+from flask_login import login_user, current_user, logout_user
+from werkzeug.security import check_password_hash
 
 
 import os
 
 
 from forms import AddProjectForm, LoginForm
-from login import login_user, check_password_hash, current_user
 from classes import db, Project, User, Auth
 
 
@@ -22,7 +23,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-auth_manager = auth(app)
+auth_manager = Auth(app)
 @auth_manager.manager.user_loader
 def load_user(user_id):
     return db.session.get(User, user_id)
@@ -31,7 +32,7 @@ def load_user(user_id):
 def admin_only(function):
     @wraps(function)
     def decorated_view(*args, **kwargs):
-        if current_user.is_anonymous or current_user.id != 1:
+        if current_user.is_anonymous or current_user.id != 0:
             return abort(code=403)
         else:
             return function(*args, **kwargs)
@@ -44,7 +45,7 @@ def home():
 
 
 @app.route('/projects')
-def show_projects_page():
+def projects():
     result = db.session.execute(db.select(Project))
     project_rows = result.scalars().all()
     return render_template("projects.html", projects=project_rows)
@@ -61,11 +62,12 @@ def show_about_site_page():
 
 
 @app.route('/contact')
-def show_contact_page():
+def contact():
     return render_template("contact.html")
 
 
 @app.route('/admin/add', methods=["GET", "POST"])
+@admin_only
 def add_project_data():
     form = AddProjectForm()
     if form.validate_on_submit():
@@ -89,15 +91,20 @@ def login():
         user = db.session.execute(db.select(User).where(User.name == login_form.id.data)).scalar()
         print(f"{user=}, {login_form.id.data=}")
         # TODO reimplemet password hash
-        if not user:
+        if not user or not check_password_hash(password=login_form.password.data,
+                                               pwhash=user.password_hash):
             print("login failed")
             flash("YOU ARE NOT THE ADMIN, PLEASE LEAVE.")
-        elif not user.password_hash == login_form.password.data:
-            flash("Incorrect password!")
         else:
             flash("credential correct")
-            # login_user(user)
+            login_user(user)
     return render_template("show_form.html", form=login_form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 
 if __name__ == "__main__":

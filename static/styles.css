@@ -1,10 +1,13 @@
+.main-content {
+    width: 50%;
+}
 .header {
     display: flex;
     flex-flow: column;
     flex-direction: column;
 }
 
-.header-text {
+.center-text {
     margin: auto;
     text-align: center;
 }
