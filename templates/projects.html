@@ -1,16 +1,17 @@
 {% include "header.html" %}
-<div class="container">
-    <div class="secondary-header">
-        <h2>My Projects</h2>
-    </div>
+<div class="center-text">
+    <h2>My Projects</h2>
+</div>
 
+<div class="container">
     {% for project_row in projects %}
+        {{ loop.index }}        
         {% if project_row.id % 2 == 0 %}
-            <div class="project-row">
+    <div class="project-row">
         {% endif %}
         <div class="project-view-container">
 
-            <div class="project-title">
+            <div class="center-text">
                 <b>{{ project_row.title }}</b>
             </div>
 
@@ -29,9 +30,10 @@
 
         </div>
         {% if project_row.id % 2 == 1 %}
-            </div>
+    </div>
         {% endif %}
     {% endfor %}
+    </div>
+    </div>
 
-</div>
 {% include "footer.html" %}
