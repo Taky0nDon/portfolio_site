@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="end">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8"/>
         <link 
             rel="stylesheet"
             href="../static/styles.css"
@@ -12,19 +12,30 @@
 
 
     <body>
-        <div class="header">
+        <div class="center-horizontal header">
             <img class="top-img" src="../static/img/top-img.webp"/>
 
             <!-- Navigation-->
             <h1 class="center-text">Welcome</h1>
             <nav class="nav-bar">
-                <div class="nav-button">| <a href="{{ url_for('home') }}">Home</a> </button>
-                <div class="nav-button">| <a href="{{ url_for('projects') }}">Projects</a> </button>
-                <div class="nav-button">| <a href="{{ url_for('show_about_me_page') }}">More About Me</a> </button>
-                <div class="nav-button">| <a href="{{ url_for('show_about_site_page') }}">More About This Site</a> </button>
-                <div class="nav-button">| <a href="{{ url_for('contact') }}">Contact/Socials</a> |</button>
+                <div class="nav-button">
+                    | <a href="{{ url_for('home') }}">Home</a>
+                </div>
+                <div class="nav-button">
+                    | <a href="{{ url_for('projects') }}">Projects</a>
+                </div>
+                <div class="nav-button">
+                    | <a href="{{ url_for('show_about_me_page') }}">More About Me</a>
+                </div>
+                <div class="nav-button">
+                    | <a href="{{ url_for('show_about_site_page') }}">More About This Site</a>
+                </div>
+                <div class="nav-button">
+                    | <a href="{{ url_for('contact') }}">Contact/Socials</a> |
+                </div>
                 {% if current_user.is_authenticated %}
-                <div class="nav-button"> <a href="{{ url_for('logout') }}">Log Out</a> |</button>
+                <div class="nav-button"> <a href="{{ url_for('logout') }}">Log Out</a> |
+                </div>
                 {% endif %}
             </nav>
         

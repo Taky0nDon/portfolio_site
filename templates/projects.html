@@ -3,9 +3,8 @@
     <h2>My Projects</h2>
 </div>
 
-<div class="container">
+<div class="container center-horizontal">
     {% for project_row in projects %}
-        {{ loop.index }}        
         {% if project_row.id % 2 == 0 %}
     <div class="project-row">
         {% endif %}
@@ -29,11 +28,10 @@
             </div>
 
         </div>
-        {% if project_row.id % 2 == 1 %}
+        {% if project_row.id % 2 == 1 or project_row.id == projects|length - 1 %}
     </div>
         {% endif %}
     {% endfor %}
-    </div>
-    </div>
+</div>
 
 {% include "footer.html" %}

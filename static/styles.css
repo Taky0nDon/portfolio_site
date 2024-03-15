@@ -1,11 +1,15 @@
-.main-content {
+.center-horizontal {
+  display: flex; /* Make the parent a flex container */
+  flex-direction: column;
+  justify-content: center; /* Center children along the main axis (horizontal) */
+}
+
+.body-text p {
     width: 50%;
 }
 
 .header {
-    display: flex;
-    flex-flow: column;
-    flex-direction: column;
+    font-weight: bold;
 }
 
 .center-text {
@@ -29,32 +33,12 @@
 
 .container {
     display: flex;
-    flex-direction: column;
-    justify-content: left;
-}
-
-.container > *:last-child {
-    margin-bottom: 10em;
+    justify-content: flex-start;
 }
 
 .project-row {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-items: center;
-    justify-self: center;
-    justify-content: left;
-    
-}
-
-/* .project-row > :first-child {
-    align-self: left;
-}
-*/
-
-.container:last-child .project-view-container {
-    align-items: left;
-    justify-self: left;
+    justify-content: space-evenly;
 }
 
 .project-view-container {
