@@ -48,7 +48,7 @@ def home():
 def projects():
     result = db.session.execute(db.select(Project))
     project_rows = result.scalars().all()
-    return render_template("projects.html", projects=project_rows, row_count=0)
+    return render_template("projects.html", projects=project_rows, test_bool=False)
 
 
 @app.route('/about-me')
