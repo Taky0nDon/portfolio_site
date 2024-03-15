@@ -4,6 +4,10 @@
   justify-content: center; /* Center children along the main axis (horizontal) */
 }
 
+.container {
+    display: flex;
+}
+
 .body-text p {
     width: 50%;
 }
@@ -31,11 +35,6 @@
     margin: auto;
 }
 
-.container {
-    display: flex;
-    justify-content: flex-start;
-}
-
 .project-row {
     display: flex;
     justify-content: space-evenly;
@@ -43,8 +42,9 @@
 
 .project-view-container {
     display: flex;
+    flex-wrap: wrap;
     flex-flow: column;
-    flex: .4;
+    flex: 50%;
     align-items: normal;
     justify-content: space-around;
     margin-bottom: 3em;
