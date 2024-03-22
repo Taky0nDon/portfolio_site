@@ -48,7 +48,7 @@ def home():
 def projects():
     result = db.session.execute(db.select(Project))
     project_rows = result.scalars().all()
-    return render_template("projects.html", projects=project_rows, test_bool=False)
+    return render_template("projects.html", projects=project_rows)
 
 
 @app.route('/about-me')
@@ -106,6 +106,12 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+
+@app.route('/test')
+def test_projects():
+    result = db.session.execute(db.select(Project))
+    project_rows = result.scalars().all()
+    return render_template("project_test.html", projects=project_rows)
 
 if __name__ == "__main__":
     app.run(debug=True)

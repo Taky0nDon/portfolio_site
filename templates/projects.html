@@ -4,13 +4,10 @@
 </div>
 
 <div class="container center-horizontal">
-    {% set unfinished_row = "" %}
     {% for project_row in projects %}
-        {% if projects|length % 2 == 1 and project_row.id == projects|length - 1 %}
-            {% set unfinished_row = "unfinished-row" %}
-        {% endif %}
+        <p> loop.index = {{loop.index}} </p>
         {% if project_row.id % 2 == 0 %}
-        <div class="project-row {{ unfinished_row }}">
+        <div class="project-row">
         {% endif %}
         <div class="project-view-container">
 
