@@ -89,11 +89,8 @@ def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
         user = db.session.execute(db.select(User).where(User.name == login_form.id.data)).scalar()
-        print(f"{user=}, {login_form.id.data=}")
-        # TODO reimplemet password hash
         if not user or not check_password_hash(password=login_form.password.data,
                                                pwhash=user.password_hash):
-            print("login failed")
             flash("YOU ARE NOT THE ADMIN, PLEASE LEAVE.")
         else:
             flash("credential correct")
