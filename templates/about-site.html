@@ -1,7 +1,26 @@
-
 {% include "header.html" %}
 <div class="center-text">
     <h2>About This Site</h2>
 </div>
-
+<div class="body-text">
+    <p>This site was built with HTML, handrolled CSS, and deployed with Python and Flask.</p>
+    <p>Since I spent a lot more time learning how to write procedural Python code than
+    I spent learning CSS or the nuances of HTML, certain portions of making this site
+    were a great struggle. Particularly the <a href={{ url_for('projects') }}>Projects page</a>!
+    </p>
+    <p>
+    I had a vision in my head for how I wanted the page laid out, but actually accomplishing
+    it turned out to be a lot more difficult than I expect. But I was finally able to wrap
+    my head about the flexbox concepts, at least enough to create a serviceable facsimile
+    of what I saw in my head.
+    </p>
+    <p>
+    I believe the crucial eureka moment was when I finally understood the nature of containers.
+    When that clicked, I managed to get the layout I wanted by nesting row-containers in
+    a column-container, and setting the max-width of each project-card. The biggest hurdle
+    was keeping the design consistent when the final row was only one project. It would
+    either be center-aligned, or stretch the entire width of the container. Setting the
+    max-width of the card was paramount to keep a row of a single card left aligned.
+    </p>
+</div>
 {% include "footer.html" %}

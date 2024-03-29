@@ -5,32 +5,25 @@
     <h2>My Projects</h2>
 </div>
 
-<div class="container center-horizontal">
     {% for project_row in projects %}
-        <p> loop.index = {{loop.index}} </p>
         {% if project_row.id % 2 == 0 %}
         <div class="project-row">
         {% endif %}
-        <div class="project-view-container">
-
-            <div class="center-text">
-                <b>{{ project_row.title }}</b>
+            <div class="project-view-container">
+                <div class="center-text">
+                    <b>{{ project_row.title }}</b>
+                </div>
+                <div class="project-images">
+                    <img src="/static/img/site_screenshot.png" />
+                    <img src="/static/img/site_screenshot.png" />
+                </div>
+                <span class="project-description">
+                    {{ project_row.description }}
+                </span>
+                <div class="project-gh-url">
+                    <a href="https://github.com">{{ project_row.github_url }}</a>
+                </div>
             </div>
-
-            <div class="project-images">
-                <img src="/static/img/site_screenshot.png" />
-                <img src="/static/img/site_screenshot.png" />
-            </div>
-
-            <span class="project-description">
-                {{ project_row.description }}
-            </span>
-
-            <div class="project-gh-url">
-                <a href="https://github.com">{{ project_row.github_url }}</a>
-            </div>
-
-        </div>
         {% if loop.index % 2 == 0 or project_row.id == projects|length - 1 %}
     </div>
         {% endif %}
